@@ -70,7 +70,7 @@ public class ExcelBuilderTest {
 		user.setAge(18);
 		user.setSex(0);
 		user.setBalance(1000.1);
-		user.setBirthDay(new Date());
+		user.setBirthday(new Date());
 		
 		users.add(user);
 		
@@ -79,7 +79,7 @@ public class ExcelBuilderTest {
 		user.setAge(32);
 		user.setSex(1);
 		user.setBalance(1020.1);
-		user.setBirthDay(new Date());
+		user.setBirthday(new Date());
 		
 		users.add(user);
 		
@@ -89,7 +89,7 @@ public class ExcelBuilderTest {
 		user.setAge(null);
 		user.setSex(1);
 		user.setBalance(1040.1);
-		user.setBirthDay(new Date());
+		user.setBirthday(new Date());
 		
 		users.add(user);
 		
@@ -98,7 +98,7 @@ public class ExcelBuilderTest {
 		user.setAge(89);
 		user.setSex(0);
 		user.setBalance(1100.1);
-		user.setBirthDay(new Date());
+		user.setBirthday(new Date());
 		
 		users.add(user);
 		
@@ -108,7 +108,7 @@ public class ExcelBuilderTest {
 			user.setAge(i + 1);
 			user.setSex(0);
 			user.setBalance(1100.1);
-			user.setBirthDay(new Date());
+			user.setBirthday(new Date());
 			
 			users.add(user);
 		}
@@ -126,18 +126,18 @@ class User {
 	
 	private Integer sex;
 	
-	private Date birthDay;
+	private Date birthday;
 	
 	private Double balance;
 	
 	
 
-	public Date getBirthDay() {
-		return birthDay;
+	public Date getBirthday() {
+		return birthday;
 	}
 
-	public void setBirthDay(Date birthDay) {
-		this.birthDay = birthDay;
+	public void setBirthday(Date birthday) {
+		this.birthday = birthday;
 	}
 
 	public Double getBalance() {
