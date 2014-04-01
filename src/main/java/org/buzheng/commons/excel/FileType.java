@@ -4,7 +4,7 @@ package org.buzheng.commons.excel;
 /**
  * Excel 文件类型
  * 
- * @author Adam
+ * @author zany@buzheng.org
  *
  */
 public enum FileType {

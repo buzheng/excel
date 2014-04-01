@@ -5,7 +5,7 @@ package org.buzheng.commons.excel;
 /**
  * 表示Excel数据中的一列
  * 
- * @author Adam
+ * @author zany@buzheng.org
  *
  */
 public class Column {

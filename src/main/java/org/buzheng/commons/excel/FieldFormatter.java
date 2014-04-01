@@ -6,7 +6,7 @@ package org.buzheng.commons.excel;
 /**
  * 字段内容数据 加工处理
  * 
- * @author Adam
+ * @author zany@buzheng.org
  *
  * @param <R> 当前行的数据对象类型
  */

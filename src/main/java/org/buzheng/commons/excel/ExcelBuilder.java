@@ -24,7 +24,12 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-
+/**
+ * 
+ * @author zany@buzheng.org
+ *
+ * @param <T> 行数据对象
+ */
 public class ExcelBuilder<T> {
 	private static Logger logger = LoggerFactory.getLogger(ExcelBuilder.class);
 
