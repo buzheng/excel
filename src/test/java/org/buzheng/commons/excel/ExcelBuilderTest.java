@@ -3,7 +3,9 @@ package org.buzheng.commons.excel;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -12,6 +14,8 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ExcelBuilderTest {
+	
+	private int max = 100000;
 	
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
@@ -34,6 +38,36 @@ public class ExcelBuilderTest {
 	}
 
 	@Test
+	public void testMapToFile() throws IOException {
+		
+		List<Map<String, Object>> users = getMapData();
+		
+		List<Column> cs = new ArrayList<Column>();
+		cs.add(new Column("姓名", "name"));		
+		cs.add(new Column("年龄", "age"));
+		cs.add(new Column("性别", "sex", new FieldFormatter<Integer,  Map<String, Object>>() {
+			public Object format(Integer age, Map<String, Object> user) {
+				return age == null ? "" : (age.intValue() == 0 ? "男" : "女");
+			}}));
+		
+		cs.add(new Column("生日", "birthday", "yyyy-MM-dd"));
+		
+		cs.add(new Column("财产", "balance", "#,##0.00", true));
+		
+		long start = System.currentTimeMillis();
+		ExcelBuilder<Map<String, Object>> eb = new ExcelBuilder<Map<String, Object>>();
+		eb.setData(users);
+		eb.setColumns(cs);
+		eb.setCaption("用户信息表");
+		
+		eb.toFile("D:\\users_map.xlsx");
+		
+		System.out.println(System.currentTimeMillis() - start);
+		System.out.println("已导出");
+		
+	}
+	
+	@Test
 	public void testToFile() throws IOException {
 		
 		
@@ -47,63 +81,48 @@ public class ExcelBuilderTest {
 				return age == null ? "" : (age.intValue() == 0 ? "男" : "女");
 			}}));
 		
-		cs.add(new Column("生日", "birthDay", "yyyy-MM-dd"));
+		cs.add(new Column("生日", "birthday", "yyyy-MM-dd"));
 		
 		cs.add(new Column("财产", "balance", "#,##0.00", true));
 		
-		
+		long start = System.currentTimeMillis();
 		ExcelBuilder<User> eb = new ExcelBuilder<User>();
 		eb.setData(users);
 		eb.setColumns(cs);
 		eb.setCaption("用户信息表");
 		
 		eb.toFile("D:\\users.xlsx");
+		
+		System.out.println(System.currentTimeMillis() - start);
 		System.out.println("已导出");
 		
 	}
+	
+	
 
+	private List<Map<String, Object>> getMapData() {
+		
+		List<Map<String, Object>> users = new ArrayList<Map<String, Object>>();
+		
+		for (int i = 0; i < max; i++) {
+			Map<String, Object> user = new HashMap<String, Object>();
+			user.put("name", "张" + i);
+			user.put("age", i);
+			user.put("sex", 0);
+			user.put("balance", 1100.1);
+			user.put("birthday", new Date());
+			
+			users.add(user);
+		}
+		
+		return users;
+	}
+	
 	private List<User> getData() {
 		List<User> users = new ArrayList<User>();
 		
-		User user = new User();
-		user.setName("zhjiun");
-		user.setAge(18);
-		user.setSex(0);
-		user.setBalance(1000.1);
-		user.setBirthday(new Date());
-		
-		users.add(user);
-		
-		user = new User();
-		user.setName("congcat");
-		user.setAge(32);
-		user.setSex(1);
-		user.setBalance(1020.1);
-		user.setBirthday(new Date());
-		
-		users.add(user);
-		
-		
-		user = new User();
-		user.setName("张三");
-		user.setAge(null);
-		user.setSex(1);
-		user.setBalance(1040.1);
-		user.setBirthday(new Date());
-		
-		users.add(user);
-		
-		user = new User();
-		user.setName("里斯");
-		user.setAge(89);
-		user.setSex(0);
-		user.setBalance(1100.1);
-		user.setBirthday(new Date());
-		
-		users.add(user);
-		
-		for (int i = 0; i < 10000; i++) {
-			user = new User();
+		for (int i = 0; i < max; i++) {
+			User user = new User();
 			user.setName("三天 - " + i);
 			user.setAge(i + 1);
 			user.setSex(0);

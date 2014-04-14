@@ -218,12 +218,7 @@ public class ExcelBuilder<T> {
 				Cell cell = row.createCell(i);
 				String fieldName = column.getFieldName();
 				
-				Object cellValue = null;
-				try {
-					cellValue = FieldUtils.readDeclaredField(t, fieldName, true);
-				} catch (IllegalAccessException e) {
-					e.printStackTrace();
-				}
+				Object cellValue = this.readFieldValue(t, fieldName);
 								
 				if (column.getFieldFormatter() != null) {
 					cellValue = column.getFieldFormatter().format(cellValue, t);
@@ -270,6 +265,23 @@ public class ExcelBuilder<T> {
 				cell.setCellValue(entry.getValue());				
 				cell.setCellStyle(cellStyles.get(columns.get(index).getDataFormat()));
 			}
+		}
+	}
+	
+	private Object readFieldValue(Object target, String fieldName) {
+		if (target == null) {
+			return null;
+		}
+		
+		if (target instanceof Map) {
+			return ((Map) target).get(fieldName);
+		}
+		
+		try {
+			return FieldUtils.readDeclaredField(target, fieldName, true);
+		} catch (IllegalAccessException e) {
+			e.printStackTrace();
+			return null;
 		}
 	}
 
