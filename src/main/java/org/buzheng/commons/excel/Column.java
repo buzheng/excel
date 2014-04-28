@@ -1,5 +1,7 @@
 package org.buzheng.commons.excel;
 
+import org.apache.commons.lang3.StringUtils;
+
 
 
 /**
@@ -63,12 +65,12 @@ public class Column {
 
 	public Column(String title, String fieldName,
 			FieldFormatter fieldFormatter, String dataFormat, boolean sum) {
-		super();
-		this.title = title;
-		this.fieldName = fieldName;
-		this.fieldFormatter = fieldFormatter;
-		this.dataFormat = dataFormat;
-		this.sum = sum;
+		super();		
+		this.setTitle(title);
+		this.setFieldName(fieldName);
+		this.setFieldFormatter(fieldFormatter);
+		this.setDataFormat(dataFormat);
+		this.setSum(sum);
 	}
 
 	public String getTitle() {
@@ -76,7 +78,7 @@ public class Column {
 	}
 
 	public void setTitle(String title) {
-		this.title = title;
+		this.title = title == null ? "" : title;
 	}
 
 	public String getFieldName() {
@@ -84,7 +86,11 @@ public class Column {
 	}
 
 	public void setFieldName(String field) {
-		this.fieldName = field;
+		if (StringUtils.isBlank(field)) {
+			throw new IllegalArgumentException("invalid field name: required and not blank");
+		}
+		
+		this.fieldName = field.trim();
 	}
 
 	public FieldFormatter getFieldFormatter() {
@@ -100,7 +106,9 @@ public class Column {
 	}
 
 	public void setDataFormat(String dataFormat) {
-		this.dataFormat = dataFormat;
+		if (! StringUtils.isBlank(dataFormat)) {
+			this.dataFormat = dataFormat;
+		}
 	}
 
 	public boolean isSum() {

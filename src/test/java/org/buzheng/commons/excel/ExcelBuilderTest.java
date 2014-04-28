@@ -15,7 +15,7 @@ import org.junit.Test;
 
 public class ExcelBuilderTest {
 	
-	private int max = 100000;
+	private int max = 1000;
 	
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
