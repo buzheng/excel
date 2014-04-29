@@ -1,4 +1,4 @@
-package org.buzheng.commons.excel;
+package org.buzheng.excel;
 
 
 import java.io.ByteArrayOutputStream;
@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.io.FilenameUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.reflect.FieldUtils;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
@@ -66,14 +67,14 @@ public class ExcelBuilder<T> {
 	 */
 	public void toFile(String diskFilePath) throws IOException {
 		
-		if (diskFilePath == null || diskFilePath.isEmpty()) {
+		if (StringUtils.isBlank(diskFilePath)) {
 			logger.info("diskFilePath is null or empty");
 			return;
 		}
 		
 		diskFilePath = diskFilePath.trim();		
 		String extension = FilenameUtils.getExtension(diskFilePath);
-		if (extension == null || extension.isEmpty()) {
+		if (StringUtils.isBlank(extension)) {
 			logger.info("diskFilePath has no extention");
 			return;
 		}
@@ -81,7 +82,7 @@ public class ExcelBuilder<T> {
 		try {
 			this.setFileType(FileType.valueOf(extension.toUpperCase()));
 		} catch(IllegalArgumentException e) {
-			logger.info("not supported file type");
+			logger.info("not supported file type: {}", extension);
 			return;
 		}
 		
@@ -150,7 +151,7 @@ public class ExcelBuilder<T> {
 	 * @param sheet
 	 */
 	private void createCaption(Workbook wb, Sheet sheet) {
-		if (this.caption == null || this.caption.isEmpty()) {
+		if (StringUtils.isBlank(this.caption)) {
 			return;
 		}
 		

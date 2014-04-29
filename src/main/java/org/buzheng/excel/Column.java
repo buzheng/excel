@@ -1,4 +1,4 @@
-package org.buzheng.commons.excel;
+package org.buzheng.excel;
 
 import org.apache.commons.lang3.StringUtils;
 
