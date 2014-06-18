@@ -1,8 +1,8 @@
-excel
-=====
+# Excel 生成工具类
 
 一个基于POI的生成Excel的工具类。只需要对需要导出到Excel的各个列进行代码端的配置，就可实现导出，汇总，格式化显示等功能。
 
+## 使用方法
 使用方法参考 测试类 src/test/java。大体代码段如下：
 
 ```
@@ -28,4 +28,20 @@ eb.setCaption("用户信息表");
 
 eb.toFile("D:\\users.xlsx");
 System.out.println("已导出");
+```
+
+## 依赖
+```
+<repositories>
+	<repository>
+		<id>buzheng-excel-mvn-repo</id>
+		<url>https://raw.github.com/buzheng/buzheng-excel/mvn-repo/</url>
+	</repository>
+</repositories>
+
+<dependency>
+	<groupId>org.buzheng</groupId>
+	<artifactId>buzheng-excel</artifactId>
+	<version>0.1</version>
+</dependency>
 ```
