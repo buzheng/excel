@@ -5,7 +5,7 @@
 ## 使用方法
 使用方法参考 测试类 src/test/java。大体代码段如下：
 
-```
+```java
 List<User> users = getData();
 
 List<Column> cs = new ArrayList<Column>();
@@ -31,7 +31,7 @@ System.out.println("已导出");
 ```
 
 ## 依赖
-```
+```xml
 <repositories>
 	<repository>
 		<id>buzheng-excel-mvn-repo</id>
