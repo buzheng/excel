@@ -168,6 +168,8 @@ public class ExcelBuilder<T> {
 	
 	/**
 	 * 创建标题行
+	 * 同时在遍历的过程中 将 求和选项和格式化选项 缓存起来。
+	 * 
 	 * @param sheet
 	 * @return 行索引号
 	 */
@@ -185,15 +187,14 @@ public class ExcelBuilder<T> {
 				sumConfig.put(i, 0.0);
 			}
 			
-			if (c.getDataFormat() != null && c.getDataFormat().length() > 0) {
-				
-				if (! cellStyles.containsKey(c.getDataFormat())) {
-					DataFormat format = wb.createDataFormat();//创建格式对象  
-			        CellStyle style = wb.createCellStyle();
-			        style.setDataFormat(format.getFormat(c.getDataFormat()));
-			        
-			        cellStyles.put(c.getDataFormat(), style);
-				}
+			if (c.getDataFormat() != null && c.getDataFormat().length() > 0
+					&& (!cellStyles.containsKey(c.getDataFormat()))) {
+
+				DataFormat format = wb.createDataFormat();// 创建格式对象
+				CellStyle style = wb.createCellStyle();
+				style.setDataFormat(format.getFormat(c.getDataFormat()));
+
+				cellStyles.put(c.getDataFormat(), style);
 			}
 		}
 		
@@ -206,7 +207,7 @@ public class ExcelBuilder<T> {
 	 */
 	@SuppressWarnings("unchecked")
 	private void createBody(Workbook wb, Sheet sheet, List<T> data) {
-		if (data == null || data.size() == 0) {
+		if (data == null || data.isEmpty()) {
 			return;
 		}
 				
@@ -281,7 +282,9 @@ public class ExcelBuilder<T> {
 		try {
 			return FieldUtils.readDeclaredField(target, fieldName, true);
 		} catch (IllegalAccessException e) {
-			e.printStackTrace();
+			if (logger.isDebugEnabled()) {
+				logger.debug("error happens when read field value: {}", fieldName);
+			}
 			return null;
 		}
 	}

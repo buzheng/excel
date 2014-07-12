@@ -15,29 +15,33 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class ExcelBuilderTest {
+	
+	private static Logger logger = LoggerFactory.getLogger(ExcelBuilderTest.class);
 	
 	private int max = 1000;
 	
 	@BeforeClass
-	public static void setUpBeforeClass() throws Exception {
-		System.out.println("======================== setUpBeforeClass");
+	public static void setUpBeforeClass() {
+		logger.info("======================== setUpBeforeClass");
 	}
 
 	@AfterClass
-	public static void tearDownAfterClass() throws Exception {
-		System.out.println("======================== tearDownAfterClass");
+	public static void tearDownAfterClass() {
+		logger.info("======================== tearDownAfterClass");
 	}
 
 	@Before
-	public void setUp() throws Exception {
-		System.out.println("======================== setUp");
+	public void setUp() {
+		logger.info("======================== setUp");
 	}
 
 	@After
-	public void tearDown() throws Exception {
-		System.out.println("======================== tearDown");
+	public void tearDown() {
+		logger.info("======================== tearDown");
 	}
 
 	@Test
@@ -65,8 +69,8 @@ public class ExcelBuilderTest {
 		
 		eb.toFile("D:\\users_map.xlsx");
 		
-		System.out.println(System.currentTimeMillis() - start);
-		System.out.println("已导出");
+		logger.info((System.currentTimeMillis() - start) + "");
+		logger.info("已导出");
 		
 	}
 	
@@ -96,8 +100,8 @@ public class ExcelBuilderTest {
 		
 		eb.toFile("D:\\users.xlsx");
 		
-		System.out.println(System.currentTimeMillis() - start);
-		System.out.println("已导出");
+		logger.info((System.currentTimeMillis() - start) + "");
+		logger.info("已导出");
 		
 	}
 	
